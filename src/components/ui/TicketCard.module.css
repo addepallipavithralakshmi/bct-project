@@ -1,0 +1,141 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card.vip {
+  border-color: #FDE68A;
+  background: linear-gradient(135deg, #FFFFFF 60%, #FFFBEB 100%);
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px 12px;
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.label {
+  margin: 0 0 2px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ticketId {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  font-family: monospace;
+}
+
+.badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.levelBadge, .scanBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.vipBadge {
+  background: #FFFBEB;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+
+.normalBadge {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.scanned {
+  background: #F3F4F6;
+  color: var(--color-text-secondary);
+}
+
+.valid {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+/* ── Details ── */
+.details {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.detailLabel {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.detailValue {
+  font-size: 13px;
+  color: var(--color-text);
+  font-weight: 500;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.address {
+  font-family: monospace;
+  font-size: 12px;
+}
+
+/* ── Used banner ── */
+.usedBanner {
+  background: #F3F4F6;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  text-align: center;
+  padding: 8px 18px;
+  border-top: 1px solid var(--color-border);
+}

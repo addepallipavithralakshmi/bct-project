@@ -1,0 +1,168 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  height: var(--topbar-height);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+
+.left {
+  flex: 1;
+  min-width: 0;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* ── Network badge ── */
+.networkBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.networkBadge.success {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.networkBadge.warning {
+  background: var(--color-warning-light);
+  color: #92400E;
+}
+
+.networkBadge.error {
+  background: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.networkBadge.idle {
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+}
+
+/* ── Wallet button ── */
+.connectBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  white-space: nowrap;
+}
+
+.connectBtn:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.connectBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.walletConnected {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--color-primary-light);
+  border-radius: var(--radius-md);
+}
+
+.connectedDot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-success);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.address {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  font-family: monospace;
+}
+
+/* ── Spinner ── */
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Error banner ── */
+.errorBanner {
+  position: absolute;
+  bottom: -44px;
+  left: 0;
+  right: 0;
+  background: var(--color-error-light);
+  color: var(--color-error);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--color-error);
+  z-index: 49;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .topbar {
+    left: 0;
+    padding: 0 16px 0 56px;
+  }
+
+  .pageTitle {
+    font-size: 16px;
+  }
+
+  .networkBadge {
+    display: none;
+  }
+
+  .address {
+    display: none;
+  }
+}

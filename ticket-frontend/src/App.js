@@ -48,31 +48,47 @@ function App() {
 
   // 🔗 CONNECT
   const connectWallet = async () => {
-    const web3 = new Web3(window.ethereum);
-    await window.ethereum.request({ method: "eth_requestAccounts" });
+    try {
+      if (!window.ethereum) {
+        alert("MetaMask not found. Please install MetaMask.");
+        return;
+      }
 
-    const accounts = await web3.eth.getAccounts();
-    setAccount(accounts[0]);
+      await window.ethereum.request({ method: "eth_requestAccounts" });
 
-    const networkId = await web3.eth.net.getId();
-    const deployedNetwork = Tickets.networks[networkId];
+      const web3 = new Web3(window.ethereum);
+      const accounts = await web3.eth.getAccounts();
+      setAccount(accounts[0]);
 
-    const instance = new web3.eth.Contract(
-      Tickets.abi,
-      deployedNetwork && deployedNetwork.address
-    );
+      // Web3 v4 returns BigInt — convert to string for network lookup
+      const networkId = (await web3.eth.net.getId()).toString();
+      const deployedNetwork = Tickets.networks[networkId];
 
-    setContract(instance);
+      if (!deployedNetwork) {
+        alert(`Contract not found on network ${networkId}. Make sure Ganache is running and contracts are deployed.`);
+        return;
+      }
 
-    const admin = await instance.methods.admin().call();
-    const verifier = await instance.methods.verifier().call();
+      const instance = new web3.eth.Contract(
+        Tickets.abi,
+        deployedNetwork.address
+      );
 
-    if (accounts[0].toLowerCase() === admin.toLowerCase()) {
-      setRole("ADMIN 👑");
-    } else if (accounts[0].toLowerCase() === verifier.toLowerCase()) {
-      setRole("VERIFIER 🎯");
-    } else {
-      setRole("USER 👤");
+      setContract(instance);
+
+      const admin = await instance.methods.admin().call();
+      const verifier = await instance.methods.verifier().call();
+
+      if (accounts[0].toLowerCase() === admin.toLowerCase()) {
+        setRole("ADMIN 👑");
+      } else if (accounts[0].toLowerCase() === verifier.toLowerCase()) {
+        setRole("VERIFIER 🎯");
+      } else {
+        setRole("USER 👤");
+      }
+    } catch (err) {
+      console.error("Wallet connection failed:", err);
+      alert("Connection failed: " + err.message);
     }
   };
 
